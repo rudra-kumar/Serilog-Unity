@@ -10,7 +10,15 @@ namespace MainThreadDispatcher.Unity
         {
             get
             {
-                if (_instance is null) _instance = Object.FindObjectOfType<UnityMainThreadDispatcher>();
+                if (_instance is null)
+                {
+                    _instance = Object.FindObjectOfType<UnityMainThreadDispatcher>();
+                    if (_instance == null)
+                    {
+                        GameObject mainThreadDispatcher = new GameObject("MainThreadDispatcher");
+                        _instance = mainThreadDispatcher.AddComponent<UnityMainThreadDispatcher>();
+                    }
+                }
 
                 return _instance;
             }
